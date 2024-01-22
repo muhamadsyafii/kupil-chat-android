@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace 'id.syafii.kupilchat'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "id.syafii.kupilchat"
         minSdk 26
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -21,7 +21,19 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "APP_ID_SENDBIRD", "\"F37AA130-7D71-46F9-91B0-036498572544\""
+            buildConfigField "String", "BASE_URL", "\"https://api-F37AA130-7D71-46F9-91B0-036498572544.sendbird.com\""
+            buildConfigField "String", "API_TOKEN", "\"0fc25641e4d3188a3ebc67b3310ba0f55c3ecf70\""
         }
+
+        debug {
+            minifyEnabled false
+            ext.alwaysUpdateBuildId = false
+            buildConfigField "String", "APP_ID_SENDBIRD", "\"F37AA130-7D71-46F9-91B0-036498572544\""
+            buildConfigField "String", "BASE_URL", "\"https://api-F37AA130-7D71-46F9-91B0-036498572544.sendbird.com\""
+            buildConfigField "String", "API_TOKEN", "\"0fc25641e4d3188a3ebc67b3310ba0f55c3ecf70\""
+        }
+
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -29,6 +41,10 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
+        buildConfig true
     }
 }
 
@@ -43,6 +59,17 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
 
+    implementation 'com.sendbird.sdk:uikit:3.+'
+    implementation "com.sendbird.sdk:sendbird-chat:4.+"
 
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.1"
+    debugImplementation "com.github.chuckerteam.chucker:library:4.0.0"
+    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:4.0.0"
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
+    implementation 'com.google.code.gson:gson:2.10.1'
 
 }
